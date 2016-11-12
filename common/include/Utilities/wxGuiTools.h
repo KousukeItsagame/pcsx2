@@ -40,7 +40,8 @@ class wxSpinCtrl;
 
 namespace pxSizerFlags
 {
-	static const int StdPadding = 4;
+	// Padding was reduced from 4 to fit in a 1024x768 screen
+	static const int StdPadding = 3;
 
 	extern wxSizerFlags StdSpace();
 	extern wxSizerFlags StdCenter();
