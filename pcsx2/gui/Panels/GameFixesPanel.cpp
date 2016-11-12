@@ -65,7 +65,7 @@ Panels::GameFixesPanel::GameFixesPanel( wxWindow* parent )
 	// By default, wx will create a small widget with a scrollbar. If display
 	// is big enough, set a min size to avoid the scrollbar
 	if( wxSystemSettings::GetMetric(wxSYS_SCREEN_Y) > 850 )
-		m_listbox->SetMinSize(wxSize(-1, 420));
+		m_listbox->SetMinSize(wxSize(-1, 400));
 
 	m_check_Enable->SetToolTip(pxE(L"Gamefixes can work around wrong emulation in some titles. \nThey may also cause compatibility or performance issues.\n\nThe safest way is to make sure that all game fixes are completely disabled.")).SetSubPadding( 1 );
 	m_check_Enable->SetValue( g_Conf->EnableGameFixes );
