@@ -287,7 +287,7 @@ void Panels::SpeedHacksPanel::EnableStuff( AppConfig* configToUse )
 	// Layout necessary to ensure changed slider text gets re-aligned properly
 	// and to properly gray/ungray pxStaticText stuff (I suspect it causes a
 	// paint event to be sent on Windows)
-	Layout();
+	TrigLayout();
 }
 
 void Panels::SpeedHacksPanel::AppStatusEvent_OnSettingsApplied()
@@ -367,13 +367,27 @@ void Panels::SpeedHacksPanel::Defaults_Click( wxCommandEvent& evt )
 void Panels::SpeedHacksPanel::EECycleRate_Scroll(wxScrollEvent &event)
 {
 	SetEEcycleSliderMsg();
-	Layout();
+
+	TrigLayout();
+
 	event.Skip();
 }
 
 void Panels::SpeedHacksPanel::VUCycleRate_Scroll(wxScrollEvent &event)
 {
 	SetVUcycleSliderMsg();
-	Layout();
+
+	TrigLayout();
+
 	event.Skip();
+}
+
+void Panels::SpeedHacksPanel::TrigLayout()
+{
+	Layout();
+
+	wxWindow* win = this;
+	do {
+		win->Fit();
+	} while (win = win->GetParent());
 }
