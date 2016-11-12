@@ -384,8 +384,25 @@ void Panels::SpeedHacksPanel::VUCycleRate_Scroll(wxScrollEvent &event)
 
 void Panels::SpeedHacksPanel::TrigLayout()
 {
+	// Reset the size information so wxWidgets can compute best value
+	wxSize reset(-1, -1);
+	m_eeSliderPanel->SetMinSize(reset);
+	m_vuSliderPanel->SetMinSize(reset);
+
+	// Take into account the current shape
 	Layout();
 
+	// Get the height of both slider boxes
+	int ee_min = m_eeSliderPanel->GetSize().GetHeight();
+	int vu_min = m_vuSliderPanel->GetSize().GetHeight();
+	wxSize max_min(-1, std::max(ee_min, vu_min));
+
+	// Align the small slider box on the big one.
+	m_eeSliderPanel->SetMinSize(max_min);
+	m_vuSliderPanel->SetMinSize(max_min);
+	Layout();
+
+	// Propagate the info to parent so main windows is resized accordingly
 	wxWindow* win = this;
 	do {
 		win->Fit();
